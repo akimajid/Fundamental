@@ -197,7 +197,7 @@
         }
       };
 
-      const saveEditData = () => {
+      const saveEditData = (editIdx) => {
         const fullNameInput = document.getElementById("editFullName").value;
         const occupationInput =
           document.getElementById("editOccupation").value;
@@ -222,7 +222,6 @@
         data[editIdx].gender = gender
 
         renderData()
-
 
 
       }
