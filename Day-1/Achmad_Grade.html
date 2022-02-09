@@ -1,0 +1,39 @@
+<script>
+  let namaLengkap = prompt("Input Nama Anda: ");
+  let nim = prompt("Input Nomor Nim Anda: ");
+  let nilai = parseInt(prompt("Masukan Nilai Anda: "));
+
+  // alert (namaLengkap)
+  // alert (nim)
+  // alert (nilai)
+
+  if (nilai > 100) {
+    alert("nilai anda tidak valid silahkan input kembali");
+  } else if (nilai >= 95) {
+    alert("nilai anda A+");
+  } else if (nilai >= 90) {
+    alert("nilai anda A");
+  } else if (nilai >= 85) {
+    alert("nilai anda B+");
+  } else if (nilai >= 80) {
+    alert("nilai anda B");
+  } else if (nilai >= 75) {
+    alert("nilai anda C+");
+  } else if (nilai >= 70) {
+    alert("nilai anda C");
+  } else if (nilai >= 65) {
+    alert("nilai anda D+");
+  } else if (nilai >= 60) {
+    alert("nilai anda D");
+  } else if (nilai <= 59) {
+    alert("nilai anda F");
+  } else if (nilai < 0) {
+    alert("nilai anda tidak valid silahkan input kembali");
+  }
+
+  alert(`
+Nama Lengkap: ${namaLengkap}
+NIM: ${nim}
+Nilai: ${nilai}
+`);
+</script>

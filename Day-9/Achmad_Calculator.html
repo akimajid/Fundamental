@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator</title>
+</head>
+<body>
+    <h1>Hitung Perkalian</h1>
+    <h2>Hasil Penjumlahan Anda Adalah : <span id="hasil"></span> </h2>
+
+    <input id="value1" type="number">
+    <input id="value2" type="number">
+    <br>
+    <br>
+    <button onclick="valueTambah()">Tambah</button>
+    <button onclick="valueKurang()">Kurang</button>
+    <button onclick="valueKali()">Kali</button>
+    <button onclick="valueBagi()">Bagi</button>
+
+<script>
+    valueTambah = () => {
+        let inputValue1 = document.getElementById("value1").value
+        let inputValue2 = document.getElementById("value2").value
+        inputValue1 = parseInt(inputValue1)
+        inputValue2 = parseInt(inputValue2)
+
+        document.getElementById("hasil").innerHTML = inputValue1 + inputValue2
+    }
+
+    valueKurang = () => {
+        let inputValue1 = document.getElementById("value1").value
+        let inputValue2 = document.getElementById("value2").value
+        inputValue1 = parseInt(inputValue1)
+        inputValue2 = parseInt(inputValue2)
+
+        document.getElementById("hasil").innerHTML = inputValue1 - inputValue2
+    }
+
+    valueKali = () => {
+        let inputValue1 = document.getElementById("value1").value
+        let inputValue2 = document.getElementById("value2").value
+        inputValue1 = parseInt(inputValue1)
+        inputValue2 = parseInt(inputValue2)
+
+        document.getElementById("hasil").innerHTML = inputValue1 * inputValue2 
+    }
+
+    valueBagi = () => {
+        let inputValue1 = document.getElementById("value1").value
+        let inputValue2 = document.getElementById("value2").value
+        inputValue1 = parseInt(inputValue1)
+        inputValue2 = parseInt(inputValue2)
+
+        document.getElementById("hasil").innerHTML = inputValue1 / inputValue2 
+    }
+</script>
+</body>
+</html>

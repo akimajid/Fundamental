@@ -1,0 +1,319 @@
+<script>
+  // // Untuk menyimpan data produk (buku) kita
+  // const products = [
+  //   {
+  //     namaBuku: "LOTR",
+  //     hargaBuku: 10000,
+  //     jumlahBuku: 0,
+  //     produkTerbeli: 0,
+  //   },
+  //   {
+  //     namaBuku: "Harry Potter",
+  //     hargaBuku: 7000,
+  //     jumlahBuku: 0,
+  //     produkTerbeli: 0,
+  //   },
+  //   {
+  //     namaBuku: "Sherlock",
+  //     hargaBuku: 12000,
+  //     jumlahBuku: 0,
+  //     produkTerbeli: 0,
+  //   },
+  //   {
+  //     namaBuku: "Naruto",
+  //     hargaBuku: 15000,
+  //     jumlahBuku: 0,
+  //     produkTerbeli: 0,
+  //   },
+  // ];
+
+  class Product {
+    constructor(namaBuku, hargaBuku) {
+      this.namaBuku = namaBuku;
+      this.hargaBuku = hargaBuku;
+      this.jumlahBuku = 0;
+      this.produkTerbeli = 0;
+    }
+
+    calculateTotalPrice = () => {
+      return this.hargaBuku * this.jumlahBuku;
+    };
+
+    bookList = () => {
+      return `${this.namaBuku} --> Rp.${this.hargaBuku.toLocaleString()}\n`;
+    };
+
+    toString = () => {
+      return `${this.namaBuku} --> Rp.${this.hargaBuku.toLocaleString()} x ${
+        this.jumlahBuku
+      } = ${this.calculateTotalPrice().toLocaleString()}\n`;
+    };
+  }
+
+  class Book extends Product {
+    constructor(namaBuku, hargaBuku, pengarang, tahunRilis) {
+      super(namaBuku, hargaBuku);
+      this.pengarang = pengarang;
+      this.tahunRilis = tahunRilis;
+    }
+    bookList = () => {
+      return `${this.namaBuku} by ${this.pengarang} (${
+        this.tahunRilis
+      }) --> ${this.hargaBuku.toLocaleString()}\n`;
+    };
+  }
+
+  const books = [
+    new Book("LOTR", 10000, "Tolkien", "1995"),
+    new Book("Harry Potter", 7000, "Rowling", "2001"),
+    new Book("Sherlock", 12000, "Sir Arthur", "2005"),
+    new Book("Naruto", 15000, "Kishimoto", "2003"),
+  ];
+
+  let report = [];
+
+  const showMenu = (isPrompt = false, pesan = "") => {
+    let productsList = pesan + "\n";
+
+    for (let i = 0; i < books.length; i++) {
+      productsList += `${i + 1}. ${books[i].bookList()}`;
+    }
+
+    if (isPrompt) {
+      // User input nomor urut dari product list
+      let userInput = prompt(productsList);
+      userInput = parseInt(userInput);
+
+      // Nomor harus dikurang 1, Untuk menghasilkan index
+
+      let userInputIndex = userInput - 1;
+      return userInputIndex;
+    }
+
+    alert(productsList);
+  };
+
+  const adminAddData = () => {
+    // Input nama produk baru
+    let userInputNewProduct = prompt("Anda mau menambahkan buku apa?");
+    // Input harga produk baru
+    let userInputNewPrice = prompt("Berapa harga barang baru anda?");
+    // Untuk menampilkan input data menjadi number
+    userInputNewPrice = parseInt(userInputNewPrice);
+
+    let userInputNewAuthor = prompt("Siapa nama penulisnya?");
+    let userInputNewYearReleased = prompt("Kapan tahun rilisnya?");
+    userInputNewYearReleased = parseInt(userInputNewYearReleased);
+
+    // Untuk menambah produk baru
+    books.push(
+      new Book(
+        userInputNewProduct,
+        userInputNewPrice,
+        userInputNewAuthor,
+        userInputNewYearReleased
+      )
+    );
+
+    // books.push({
+    //   namaBuku: userInputNewProduct,
+    //   hargaBuku: userInputNewPrice,
+    //   jumlahBuku: 0,
+    //   produkTerbeli: 0,
+    // });
+
+    alert("Buku tertambahkan!");
+  };
+
+  const adminDeleteData = () => {
+    // Untuk mendapatkan index yang akan kita ingin hapus
+    const userDeleteItemIndex = showMenu(true);
+
+    // Untuk menghapus sebuah index dalam array
+    books.splice(userDeleteItemIndex, 1);
+
+    alert("Buku telah terhapus!");
+  };
+
+  const adminEditData = () => {
+    const userEditItemIndex = showMenu(true);
+
+    let userEditValue = prompt(
+      `Mau ubah ${books[userEditItemIndex].namaBuku} menjadi apa?`
+    );
+    let userEditPriceValue = prompt("Harganya berapa?");
+    userEditPriceValue = parseInt(userEditPriceValue);
+    let UserEditNewAuthor = prompt("Siapa Penulisnya?");
+    let UserEditNewYearReleased = prompt("Tahun berapa rilisnya?");
+    UserEditNewYearReleased = parseInt(UserEditNewYearReleased);
+
+    books[userEditItemIndex].namaBuku = userEditValue;
+    books[userEditItemIndex].hargaBuku = userEditPriceValue;
+    books[userEditItemIndex].pengarang = UserEditNewAuthor;
+    books[userEditItemIndex].tahunRilis = UserEditNewYearReleased;
+
+    alert("Buku berhasil diganti!");
+  };
+
+  // User functions
+  const userAddToCart = () => {
+    const userCartIndex = showMenu(true);
+
+    let userCartQty = prompt(
+      `Mau beli ${books[userCartIndex].namaBuku} berapa banyak?`
+    );
+    userCartQty = parseInt(userCartQty);
+
+    books[userCartIndex].jumlahBuku += userCartQty;
+    books[userCartIndex].produkTerbeli += userCartQty;
+  };
+
+  const userShowCart = (isCheckout = false) => {
+    let userCart = "";
+    let totalPrice = 0;
+
+    for (let i = 0; i < books.length; i++) {
+      userCart += `${i + 10}. ${books[i].toString()}`;
+
+      totalPrice += books[i].calculateTotalPrice();
+
+      // for (let i = 0; i < books.length; i++) {
+      //   userCart += `${i + 1}. ${books[i].namaBuku} = ${
+      //     books[i].jumlahBuku
+      //   } x Rp.${books[i].hargaBuku.toLocaleString()} -> Rp. ${(
+      //     books[i].hargaBuku * books[i].jumlahBuku
+      //   ).toLocaleString()} \n`;
+
+      // totalPrice += books[i].hargaBuku * books[i].jumlahBuku;
+    }
+
+    if (isCheckout) {
+      // Tambah baris untuk total price
+      userCart += `\n Total belanjaan anda adalah Rp. ${totalPrice.toLocaleString()}`;
+
+      let userPayment = prompt(userCart);
+      userPayment = parseInt(userPayment);
+
+      // Kalau lebih (kembalian)
+      if (userPayment > totalPrice) {
+        alert(
+          `Kembalian anda sebesar Rp. ${(
+            userPayment - totalPrice
+          ).toLocaleString()}`
+        );
+      } else if (userPayment === totalPrice) {
+        alert("Terima kasih sudah membayar dengan uang pas");
+      } else if (userPayment < totalPrice) {
+        alert(
+          `Uang anda kurang Rp. ${(totalPrice - userPayment).toLocaleString()}`
+        );
+      }
+
+      for (let i = 0; i < books.length; i++) {
+        if (books[i].jumlahBuku > 0) {
+          const reportBaru = {
+            namaBuku: books[i].namaBuku,
+            hargaBuku: books[i].hargaBuku,
+            jumlahBuku: books[i].jumlahBuku,
+            produkTerbeli: books[i].produkTerbeli,
+          };
+          report.push(reportBaru);
+        }
+      }
+
+      for (let i = 0; i < books.length; i++) {
+        books[i].jumlahBuku = 0;
+      }
+
+      return;
+    }
+
+    alert(userCart);
+  };
+
+  do {
+    // Main menu
+    const userMainMenuInput = prompt(`Login sebagai:
+      1. Admin
+      2. User
+      3. Exit`);
+
+    if (userMainMenuInput == "1") {
+      do {
+        const adminMenuInput = prompt(`Menu:
+      1. Tambah data
+      2. Delete data
+      3. Show data
+      4. Edit data
+      5. Show report
+      6. Exit`);
+        // Jika user pilih tambah data
+        if (adminMenuInput == "1") {
+          adminAddData();
+        } else if (adminMenuInput == "2") {
+          adminDeleteData();
+        } else if (adminMenuInput == "3") {
+          showMenu(false);
+        } else if (adminMenuInput == "4") {
+          // Jika user pilih update data
+          adminEditData();
+        } else if (adminMenuInput == "5") {
+          if (report.length === 0) {
+            alert("Belum ada aktivitas");
+          } else {
+            let reportData = "";
+            let totalTransactionAmount = 0;
+
+            for (let i = 0; i < report.length; i++) {
+              reportData += `${i + 1}. ${report[i].namaBuku} = ${
+                report[i].produkTerbeli
+              } -> Rp. ${(
+                report[i].hargaBuku * report[i].produkTerbeli
+              ).toLocaleString()} \n`;
+
+              totalTransactionAmount +=
+                report[i].hargaBuku * report[i].jumlahBuku;
+            }
+
+            // for (let i = 0; i < products.length; i++) {
+            //   reportData += `${i + 1}. ${products[i].namaBuku} = ${
+            //     products[i].produkTerbeli
+            //   } -> Rp. ${(
+            //     products[i].hargaBuku * products[i].produkTerbeli
+            //   ).toLocaleString()} \n`;
+
+            //   totalTransactionAmount += products[i].hargaBuku * products[i].jumlahBuku;
+            // }
+
+            reportData += `Total besaran transaksi user = Rp. ${totalTransactionAmount.toLocaleString()}`;
+
+            alert(reportData);
+          }
+        } else if (adminMenuInput == "6") {
+          break;
+        }
+      } while (true);
+    } else if (userMainMenuInput == "2") {
+      // Menu user
+      do {
+        const userMenuInput = prompt(`
+          1. Add to cart
+          2. Show cart
+          3. Checkout
+          4. Back`);
+
+        if (userMenuInput == "1") {
+          userAddToCart();
+        } else if (userMenuInput == "2") {
+          userShowCart();
+        } else if (userMenuInput == "3") {
+          userShowCart(true);
+        } else if (userMenuInput == "4") {
+          break;
+        }
+      } while (true);
+    } else if (userMainMenuInput == "3") {
+      break;
+    }
+  } while (true);
+</script>

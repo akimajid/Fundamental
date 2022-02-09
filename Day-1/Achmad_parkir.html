@@ -1,0 +1,49 @@
+<script>
+let jenisKendaraan = prompt ("Jenis Kendaraan")
+let durasiParkir = parseInt(prompt ("Durasi Parkir"))
+
+if (jenisKendaraan == `mobil` || jenisKendaraan == `motor`) {
+    if (jenisKendaraan == `mobil`) {
+        let duaJamPertama = 5000
+        let perJam = 2000
+        let maxBiaya = 50000
+        let biaya = 0
+        if (durasiParkir < 0) {
+            biaya = "Invalid silahkan ketik kembali"
+        } else if (durasiParkir == 0) {
+            biaya = "Gratis"
+        } else if (durasiParkir <= 2 && durasiParkir > 0) {
+            biaya = 5000
+        } else if (durasiParkir > 2) {
+            biaya = 5000 + (2000 * durasiParkir - 2)
+        } else if (durasiParkir > 50000) {
+            biaya = 50000
+        }
+    } 
+    alert ("biaya: " + biaya)
+    
+    if (jenisKendaraan == `motor`) {
+        let duaJamPertamaMotor = 3000
+        let perJamMotor = 1000
+        let maxBiayaMotor = 30000
+        let biayaMotor = 0
+        if (durasiParkir < 0) {
+            biayaMotor = "Invalid silahkan ketik kembali"
+        } else if (durasiParkir == 0) {
+            biayaMotor = "Gratis"
+        } else if (durasiParkir <= 2 && durasiParkir > 0) {
+            biayaMotor = 5000
+        } else if (durasiParkir > 2) {
+            biayaMotor = 3000 + (1000 * durasiParkir - 2)
+        } else if (durasiParkir > 30000) {
+            biayaMotor = 30000
+        }
+    } 
+} 
+
+alert ("biaya: " + biaya)
+
+
+
+
+</script>

@@ -1,0 +1,48 @@
+<script>
+  let products = ["LOTR", "Harry Potter", "sherlock", "naruto"];
+
+  do {
+    const userMenuInput = prompt(`Menu:
+1. Tambah Data
+2. Delete Data
+3. Show Data
+4. Exit`);
+
+    if (userMenuInput == "1") {
+      let userInputNewProduct = prompt("Buku apa yang akan ditambah?");
+
+      products.push(userInputNewProduct);
+      alert("Data anda sudah ditambah");
+    } else if (userMenuInput == "2") {
+      let productsList = "";
+
+      for (let i = 0; i < products.length; i++) {
+        productsList += i + 1 + ". " + products[i] + "\n";
+      }
+
+      let userDeleteItem = prompt(productsList);
+      userDeleteItem = parseInt(userDeleteItem);
+
+      let userDeleteItemIndex = userDeleteItem - 1;
+
+      products.splice(userDeleteItemIndex, 1);
+
+      alert("Menu 2");
+    } else if (userMenuInput == "3") {
+      let productsList = "";
+
+      for (let i = 0; i < products.length; i++) {
+        productsList += i + 1 + ". " + products[i] + "\n";
+      }
+      alert(productsList);
+    } else if (userMenuInput == "4") {
+      alert("terimakasih");
+      break;
+    }
+  } while (confirm);
+
+  // switch(userMenuInput) {
+  //     case "1":
+
+  // }
+</script>

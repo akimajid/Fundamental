@@ -1,0 +1,180 @@
+<script>
+  let products = ["Leci", "Apel", "Jeruk", "Mangga"];
+  let ItemsPrice = [7000, 5000, 3000, 10000];
+  let qtyCart = [0, 0, 0, 0];
+
+  do {
+    let menuAwal = prompt(`Login sebagai:
+        1. Admin
+        2. Pembeli
+        3. Exit`);
+
+    const showMenu = (isPrompt = false) => {
+      let productList = "";
+
+      for (let i = 0; i < products.length; i++) {
+        productList += `${i + 1}. ${products[i]} --> Rp. ${ItemsPrice[
+          i
+        ].toLocaleString()} \n`;
+      }
+
+      if (isPrompt) {
+        let userInput = prompt(productList);
+        userInput = parseInt(userInput);
+        let userInputIndex = userInput - 1;
+        return userInputIndex;
+      }
+      alert(productList);
+    };
+
+    do {
+      if (menuAwal == "1") {
+        const userMenuInput = prompt(`Menu:
+        1. Tambah buah
+        2. Hapus buah
+        3. Tampilkan jenis buah
+        4. Edit jenis buah
+        5. Exit`);
+
+        if (userMenuInput == "1") {
+          let userInputNewProduct = prompt("Buah apa yang akan ditambah?");
+          let userInputNewPrice = prompt("Tambahkan harga barang:");
+          userInputNewPrice = parseInt(userInputNewPrice);
+
+          products.push(userInputNewProduct);
+          ItemsPrice.push(userInputNewPrice);
+
+          alert("Data anda sudah ditambah");
+        } else if (userMenuInput == "2") {
+          const userDeleteItemIndex = showMenu(true);
+
+          products.splice(userDeleteItemIndex, 1);
+          ItemsPrice.splice(userDeleteItemIndex, 1);
+
+          alert("Data telah dihapus");
+        } else if (userMenuInput == "3") {
+          showMenu(false);
+        } else if (userMenuInput == "4") {
+          let productsList = "";
+
+          for (let i = 0; i < products.length; i++) {
+            productsList +=
+              [i + 1] +
+              ". " +
+              products[i] +
+              "--> Harga: Rp." +
+              ItemsPrice[i].toLocaleString() +
+              "\n";
+          }
+
+          let userEditData = prompt(productsList);
+          userEditData = parseInt(userEditData);
+
+          let userDeleteItemIndex = userEditData - 1;
+
+          let userEditValue = prompt(
+            `Mau ubah ${products[userEditData - 1]} jadi apa?`
+          );
+          let userUpdatePrice = prompt(
+            `Harga awal Produk ${ItemsPrice[userEditData - 1]} menjadi?`
+          );
+
+          products[userEditData - 1] = userEditValue;
+          ItemsPrice[userEditData - 1] = userUpdatePrice;
+
+          alert("Data Sudah Berubah, terimakasih");
+        } else if (userMenuInput == "5") {
+          alert("Terimakasih");
+          break;
+        }
+      } else if (menuAwal == "2") {
+        const userMenuInput2 = prompt(`Menu:
+        1. Beli buah
+        2. Belanjaan saya
+        3. Bayar
+        4. Back`);
+
+        if (userMenuInput2 == "1") {
+          let addFruit = "Silahkan pilih buah yang anda inginkan: \n";
+
+          for (let i = 0; i < products.length; i++) {
+            addFruit +=
+              [i + 1] +
+              ". " +
+              products[i] + "--> Harga: Rp." +ItemsPrice[i].toLocaleString() +
+              "\n";
+          }
+          addFruit += `${products.length + 1}. kembali`;
+
+          do {
+            let inputMenu = prompt(addFruit);
+            inputMenu = parseInt(inputMenu);
+
+            if (inputMenu == products.length + 1) {
+              break;
+            }
+
+            let inputMenuIndex = inputMenu - 1;
+            let buahTerpilih = products[inputMenuIndex];
+
+            let userQuantity = prompt(
+              `Berapa jumlah ${buahTerpilih} yang anda ingin beli? `
+            );
+            userQuantity = parseInt(userQuantity);
+
+            qtyCart[inputMenuIndex] = userQuantity;
+          } while (true);
+        } else if (userMenuInput2 == "2") {
+          let cart = "";
+          let totalHarga = 0;
+
+          for (let i = 0; i < products.length; i++) {
+            cart += `${products[i]} = ${qtyCart[i]} -> Rp. ${
+              qtyCart[i] * ItemsPrice[i]
+            }\n`;
+
+            totalHarga += qtyCart[i] * ItemsPrice[i];
+          }
+
+          cart += `Total belanjaan anda sebesar: Rp. ${totalHarga}`;
+          alert(cart);
+        } else if (userMenuInput2 == "3") {
+          let cart = "";
+          let totalHarga = 0;
+
+          for (let i = 0; i < products.length; i++) {
+            cart += `${products[i]} = ${qtyCart[i]} -> Rp. ${
+              qtyCart[i] * ItemsPrice[i]
+            }\n`;
+
+            totalHarga += qtyCart[i] * ItemsPrice[i];
+          }
+          do {
+            let pembayaran =
+              prompt(`Masukkan jumlah uang yang akan anda bayarkan
+             Total belanjaan anda = Rp. ${totalHarga}`);
+
+            pembayaran = parseInt(pembayaran);
+
+            if (pembayaran > totalHarga) {
+              alert(`kembalian anda sebesar: ${pembayaran - totalHarga}`);
+              break;
+            } else if (pembayaran < totalHarga) {
+              alert(
+                `Uang anda belum cukup, uang anda kurang: Rp. ${
+                  totalHarga - pembayaran
+                }`
+              );
+            } else if (pembayaran == totalHarga) {
+              alert("terimakasih telah berbelanja disini");
+              break;
+            }
+          } while (true);
+        } else if (userMenuInput2 == "4") {
+          alert("Terimakasih, silahkan datang kembali");
+          break;
+        }
+      }
+    } while (true);
+  } while (true);
+</script>

@@ -1,0 +1,55 @@
+<script>
+  let konfirmasi;
+
+  do {
+    do {
+      kendaraan = prompt(`Pilih kendaraan anda:
+      1. Mobil
+      2. Motor
+      3. Exit`);
+    } while (!(kendaraan == "1" || kendaraan == "2" || kendaraan == "3"));
+
+    let biayaTotal = 0;
+
+    const Mobil = "1";
+    const Motor = "2";
+
+    if (kendaraan == Mobil || kendaraan == Motor) {
+      let durasi = prompt("Durasi parkir? (Jam)");
+      durasi = parseInt(durasi);
+
+      if (durasi > 0) {
+        let duaJamPertama;
+        let perJam;
+        let maxBiaya;
+
+        if (kendaraan == "1") {
+          duaJamPertama = 5000;
+          perJam = 2000;
+          maxBiaya = 50000;
+        } else if (kendaraan == "2") {
+          duaJamPertama = 3000;
+          perJam = 1000;
+          maxBiaya = 30000;
+        }
+
+        if (durasi <= 2) {
+          biayaTotal = duaJamPertama;
+        } else if (durasi > 2) {
+          biayaTotal = duaJamPertama + perJam * (durasi - 2);
+        }
+
+        if (biayaTotal > maxBiaya) {
+          biayaTotal = maxBiaya;
+        }
+
+        alert(`Total biaya parkir anda adalah: Rp. ${biayaTotal.toLocaleString()}`);
+      } else {
+        alert("silahkan input kembali");
+      }
+    } else {
+      alert("Input anda salah, tolong pilih antara 1 atau 2");
+    }
+    konfirmasi = confirm("Apakah anda ingin mengulang?");
+  } while (konfirmasi);
+</script>

@@ -1,0 +1,74 @@
+<script>
+    let products =  ["Leci", "Apel", "Jeruk", "Mangga"]
+    let ItemsPrice = [7000, 5000, 3000, 10000]
+  
+    do {
+      const userMenuInput = prompt(`Menu:
+    1. Tambah Data
+    2. Delete Data
+    3. Show Data
+    4. Edit Data 
+    5. Exit`);
+  
+      if (userMenuInput == "1") {
+        let userInputNewProduct = prompt("Buah apa yang akan ditambah?");
+        let userInputNewPrice = prompt("Tambahkan harga barang:")
+        userInputNewPrice = parseInt(userInputNewPrice);
+  
+        products.push(userInputNewProduct);
+        ItemsPrice.push(userInputNewPrice);
+
+        alert("Data anda sudah ditambah");
+      } else if (userMenuInput == "2") {
+        let productsList = "";
+  
+        for (let i = 0; i < products.length; i++) {
+          productsList += [i + 1] + ". " + products[i] + "--> Harga: Rp." + ItemsPrice[i].toLocaleString() + "\n";
+        }
+  
+        let userDeleteItem = prompt(productsList);
+        userDeleteItem = parseInt(userDeleteItem);
+  
+        let userDeleteItemIndex = userDeleteItem - 1;
+  
+        products.splice(userDeleteItemIndex, 1);
+        ItemsPrice.splice(userDeleteItemIndex, 1);
+  
+        alert("Data telah terhapus ");
+      } else if (userMenuInput == "3") {
+        let productsList = "";
+  
+        for (let i = 0; i < products.length; i++) {
+          productsList += [i + 1] + ". " + products[i] + "--> Harga: Rp." + ItemsPrice[i].toLocaleString() + "\n";
+        }
+        alert(productsList);
+      } else if (userMenuInput == "4") {
+        let productsList = "";
+  
+        for (let i = 0; i < products.length; i++) {
+          productsList += [i + 1] + ". " + products[i] + "--> Harga: Rp." + ItemsPrice[i].toLocaleString() + "\n";
+        }
+  
+        let userEditData = prompt(productsList);
+        userEditData = parseInt(userEditData);
+  
+        let userDeleteItemIndex = userEditData - 1;
+  
+        let userEditValue = prompt(
+          `Mau ubah ${products[userEditData - 1]} jadi apa?`
+        );
+        let userUpdatePrice = prompt(`Harga awal Produk ${ItemsPrice[userEditData -1]} menjadi?`)
+  
+        products[userEditData - 1] = userEditValue;
+        ItemsPrice[userEditData -1] = userUpdatePrice
+  
+        alert("Data Sudah Berubah, terimakasih");
+      } else if (userMenuInput == "5") {
+        alert("Terimakasih");
+        break;
+      }
+    } while (confirm);
+  
+    
+  </script>
+  

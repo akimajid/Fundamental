@@ -1,0 +1,46 @@
+<script>
+
+let kendaraan = prompt(`Pilih Kendaraan Anda
+1. Mobil
+2. Motor`)
+
+let biayaTotal = 0
+
+
+if (kendaraan == ("1") || kendaraan == "2") {
+let durasi = prompt("Berapa Lama Anda Parkir (Jam)")
+durasi = parseInt(durasi)
+
+if (durasi > 0) {
+  let duaJamPertama;
+  let perJam;
+  let maxBiaya;
+
+  if (kendaraan = "1") {
+    duaJamPertama = 5000
+    perJam = 2000
+    maxBiaya = 50000
+  } else if (kendaraan = "2") {
+    duaJamPertama = 3000
+    perJam = 1000
+    maxBiaya = 3000
+  }
+
+  if (durasi <= 0) {
+    biayaTotal = duaJamPertama;
+  }
+    else if (durasi > 2) {
+      biayaTotal = duaJamPertama + perJam * (durasi - 2)
+    }
+    if (biayaTotal > maxBiaya) {
+      biayaTotal = maxBiaya
+    }
+
+    alert(`total biaya parkir anda adalah : Rp. ${biayaTotal}`)
+  } else {
+    alert ("Belum Masuk =")
+  }
+}
+
+
+</script>

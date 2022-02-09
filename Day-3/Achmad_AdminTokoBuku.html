@@ -1,0 +1,32 @@
+<script>
+
+
+const buku = [ "LOTR",
+"Harry Potter",
+"sherlock",
+"naruto",
+"One Piece",
+"Doraemon",
+];
+
+do {
+    let menu = ""
+
+for (let i = 0; i < buku.length; i++) {
+    menu += `${i + 1}. ${buku[i]}\n`;
+  }
+
+  let bukuBaru = prompt(menu)
+
+  if (bukuBaru == "" || bukuBaru == null || bukuBaru == undefined) {
+      break;
+  }
+
+  buku.push(bukuBaru)
+
+} while (true)
+
+  
+
+
+</script>

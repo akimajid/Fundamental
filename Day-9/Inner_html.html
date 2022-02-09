@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="Welcome1">Hello World</h1>
+    <h1 id="Welcome2">Halo Dunia</h1>
+    <h1 id="Welcome3">Welcome To Purwadhika</h1>
+    
+   <input id="welcomeInput" type="text">
+    <button onclick="alertValue()">Change</button>
+
+    <script>
+        const modifyInnerHtml = () => {
+            const arr = document.getElementsByTagName("h1")[0]
+
+            // console.log(arr)
+            // arr.innerHTML = ("Test")
+
+            document.getElementById("Welcome1").innerHTML = "Halooo"
+        }
+
+        // modifyInnerHtml()
+
+        const alertValue = () => {
+            const inputValue = document.getElementById("welcomeInput").value 
+            document.getElementById("Welcome1").innerHTML = inputValue
+
+            // alert(inputValue)
+        }
+    </script>
+</body>
+</html>
